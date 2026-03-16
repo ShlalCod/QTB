@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Panel | Media Buyer Portfolio</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Admin Styles -->
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/block-editor.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="login-logo">
+                    <span class="logo-text">MB</span>
+                    <span class="logo-accent">Admin</span>
+                </div>
+                <h1>Admin Panel</h1>
+                <p>Enter your password to access the admin panel</p>
+            </div>
+            
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="admin-password">Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="admin-password" placeholder="Enter admin password" required autocomplete="current-password">
+                        <button type="button" id="toggle-password" class="toggle-password" aria-label="Toggle password visibility">
+                            <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            <svg class="eye-off-icon" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                <line x1="1" y1="1" x2="23" y2="23"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div id="login-error" class="login-error" style="display: none;">
+                    Invalid password. Please try again.
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    Unlock Admin Panel
+                </button>
+            </form>
+            
+            <div class="login-footer">
+                <a href="index.html">← Back to Website</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen" hidden>
+        <div class="loading-spinner"></div>
+        <p>Loading Admin Panel...</p>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="admin-panel" class="admin-panel" hidden>
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="sidebar-logo">
+                    <span class="logo-text">MB</span>
+                    <span class="logo-accent">Admin</span>
+                </a>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#seo" class="nav-item" data-section="seo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            SEO & Meta
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#hero" class="nav-item" data-section="hero">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                <polyline points="2 17 12 22 22 17"></polyline>
+                                <polyline points="2 12 12 17 22 12"></polyline>
+                            </svg>
+                            Hero Section
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#about" class="nav-item" data-section="about">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            About Section
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#projects" class="nav-item" data-section="projects">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            Projects
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#skills" class="nav-item" data-section="skills">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="8" y1="6" x2="21" y2="6"></line>
+                                <line x1="8" y1="12" x2="21" y2="12"></line>
+                                <line x1="8" y1="18" x2="21" y2="18"></line>
+                                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                            </svg>
+                            Skills
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#experience" class="nav-item" data-section="experience">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                            Experience
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#services" class="nav-item" data-section="services">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                            Services
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contact" class="nav-item" data-section="contact">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            Contact
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#media" class="nav-item" data-section="media">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                            Media Library
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#settings" class="nav-item" data-section="settings">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-outline btn-sm btn-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Top Bar -->
+            <header class="admin-topbar">
+                <div class="topbar-left">
+                    <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Toggle sidebar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <h1 class="page-title" id="page-title">Dashboard</h1>
+                </div>
+                <div class="topbar-right">
+                    <a href="index.html" target="_blank" class="btn btn-outline btn-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                        View Site
+                    </a>
+                    <button id="save-all-btn" class="btn btn-primary btn-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                            <polyline points="7 3 7 8 15 8"></polyline>
+                        </svg>
+                        Save All
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="admin-content">
+                <!-- Dashboard Section -->
+                <section id="section-dashboard" class="admin-section active">
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="card-icon projects-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-value" id="projects-count">0</span>
+                                <span class="card-label">Projects</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-icon skills-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line></svg>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-value" id="skills-count">0</span>
+                                <span class="card-label">Skills</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-icon experience-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-value" id="experience-count">0</span>
+                                <span class="card-label">Experience</span>
+                            </div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-icon services-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle></svg>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-value" id="services-count">0</span>
+                                <span class="card-label">Services</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <h2>Quick Actions</h2>
+                        <div class="actions-grid">
+                            <button class="action-btn" data-action="add-project">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                Add New Project
+                            </button>
+                            <button class="action-btn" data-action="add-skill">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                Add New Skill
+                            </button>
+                            <button class="action-btn" data-action="export-content">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                Export Content
+                            </button>
+                            <button class="action-btn" data-action="preview-site">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                Preview Site
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEO Section -->
+                <section id="section-seo" class="admin-section">
+                    <div class="section-editor">
+                        <h2>SEO & Meta Tags</h2>
+                        <p class="section-description">Configure SEO settings and social media sharing appearance</p>
+                        
+                        <form id="seo-form" class="editor-form">
+                            <!-- Basic SEO -->
+                            <div class="form-section">
+                                <h3>Basic SEO</h3>
+                                <div class="form-group">
+                                    <label for="seo-site-title">Site Title</label>
+                                    <input type="text" id="seo-site-title" name="siteTitle" placeholder="Media Buyer Portfolio">
+                                    <span class="field-hint">Appears in browser tab and search results</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="seo-site-description">Meta Description</label>
+                                    <textarea id="seo-site-description" name="siteDescription" rows="3" placeholder="Brief description for search engines..."></textarea>
+                                    <span class="char-counter"><span id="desc-count">0</span>/160 characters</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="seo-keywords">Keywords</label>
+                                    <input type="text" id="seo-keywords" name="siteKeywords" placeholder="Media Buyer, Digital Marketer, ROAS, CPA">
+                                    <span class="field-hint">Comma-separated keywords</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="seo-site-url">Site URL (for canonical)</label>
+                                    <input type="url" id="seo-site-url" name="siteUrl" placeholder="https://yoursite.com">
+                                </div>
+                            </div>
+                            
+                            <!-- Open Graph -->
+                            <div class="form-section">
+                                <h3>Open Graph (Facebook, WhatsApp, LinkedIn)</h3>
+                                <div class="form-group">
+                                    <label for="og-title">OG Title</label>
+                                    <input type="text" id="og-title" name="ogTitle" placeholder="Title for social sharing">
+                                </div>
+                                <div class="form-group">
+                                    <label for="og-description">OG Description</label>
+                                    <textarea id="og-description" name="ogDescription" rows="2" placeholder="Description shown when sharing on social media"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="og-image">OG Image URL</label>
+                                    <input type="url" id="og-image" name="ogImage" placeholder="https://yoursite.com/og-image.jpg">
+                                    <span class="field-hint">Recommended: 1200x630 pixels</span>
+                                </div>
+                                <div class="og-preview" id="og-preview">
+                                    <h4>Preview</h4>
+                                    <div class="og-card">
+                                        <div class="og-image-placeholder" id="og-image-preview"></div>
+                                        <div class="og-content">
+                                            <span class="og-url" id="og-url-preview">yoursite.com</span>
+                                            <span class="og-title-preview" id="og-title-preview">Your Site Title</span>
+                                            <span class="og-desc-preview" id="og-desc-preview">Your description will appear here...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Twitter Card -->
+                            <div class="form-section">
+                                <h3>Twitter Card</h3>
+                                <div class="form-group">
+                                    <label for="twitter-title">Twitter Title</label>
+                                    <input type="text" id="twitter-title" name="twitterTitle" placeholder="Title for Twitter">
+                                </div>
+                                <div class="form-group">
+                                    <label for="twitter-description">Twitter Description</label>
+                                    <textarea id="twitter-description" name="twitterDescription" rows="2" placeholder="Description for Twitter"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="twitter-image">Twitter Image URL</label>
+                                    <input type="url" id="twitter-image" name="twitterImage" placeholder="https://yoursite.com/twitter-image.jpg">
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" data-action="reset-seo">Reset</button>
+                                <button type="submit" class="btn btn-primary">Save SEO Settings</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Hero Section Editor -->
+                <section id="section-hero" class="admin-section">
+                    <div class="section-editor">
+                        <h2>Hero Section</h2>
+                        <form id="hero-form" class="editor-form">
+                            <div class="form-group">
+                                <label for="hero-badge">Badge Text</label>
+                                <input type="text" id="hero-badge" name="badge" placeholder="Media Buyer & Digital Marketer">
+                            </div>
+                            <div class="form-group">
+                                <label for="hero-title-input">Main Title</label>
+                                <input type="text" id="hero-title-input" name="title" placeholder="Scalable Profit Engineering">
+                            </div>
+                            <div class="form-group">
+                                <label for="hero-subtitle">Subtitle</label>
+                                <textarea id="hero-subtitle" name="subtitle" rows="3" placeholder="I've managed $8,000,000+ in ad budgets..."></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="hero-stat1-value">Stat 1 Value</label>
+                                    <input type="text" id="hero-stat1-value" name="stat1Value" placeholder="$8M+">
+                                </div>
+                                <div class="form-group">
+                                    <label for="hero-stat1-label">Stat 1 Label</label>
+                                    <input type="text" id="hero-stat1-label" name="stat1Label" placeholder="Ad Spend Managed">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="hero-stat2-value">Stat 2 Value</label>
+                                    <input type="text" id="hero-stat2-value" name="stat2Value" placeholder="3.2x">
+                                </div>
+                                <div class="form-group">
+                                    <label for="hero-stat2-label">Stat 2 Label</label>
+                                    <input type="text" id="hero-stat2-label" name="stat2Label" placeholder="Avg. ROAS">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="hero-stat3-value">Stat 3 Value</label>
+                                    <input type="text" id="hero-stat3-value" name="stat3Value" placeholder="150+">
+                                </div>
+                                <div class="form-group">
+                                    <label for="hero-stat3-label">Stat 3 Label</label>
+                                    <input type="text" id="hero-stat3-label" name="stat3Label" placeholder="Campaigns Optimized">
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" data-action="reset-hero">Reset</button>
+                                <button type="submit" class="btn btn-primary">Save Hero Section</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- About Section Editor -->
+                <section id="section-about" class="admin-section">
+                    <div class="section-editor">
+                        <h2>About Section</h2>
+                        <form id="about-form" class="editor-form">
+                            <div class="form-group">
+                                <label for="about-title">Section Title</label>
+                                <input type="text" id="about-title" name="title" placeholder="About Me">
+                            </div>
+                            <div class="form-group">
+                                <label for="about-description">Description</label>
+                                <textarea id="about-description" name="description" rows="6" placeholder="Write a brief description about yourself..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="about-image">Profile Image URL</label>
+                                <input type="url" id="about-image" name="image" placeholder="https://example.com/profile.jpg">
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" data-action="reset-about">Reset</button>
+                                <button type="submit" class="btn btn-primary">Save About Section</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Projects Section Editor -->
+                <section id="section-projects" class="admin-section">
+                    <div class="section-editor">
+                        <div class="section-header">
+                            <h2>Projects</h2>
+                            <button class="btn btn-primary" id="add-project-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                Add Project
+                            </button>
+                        </div>
+                        <div class="items-list" id="projects-list"></div>
+                    </div>
+                </section>
+
+                <!-- Skills Section Editor -->
+                <section id="section-skills" class="admin-section">
+                    <div class="section-editor">
+                        <div class="section-header">
+                            <h2>Skills</h2>
+                            <button class="btn btn-primary" id="add-skill-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                Add Skill
+                            </button>
+                        </div>
+                        <div class="items-list" id="skills-list"></div>
+                    </div>
+                </section>
+
+                <!-- Experience Section Editor -->
+                <section id="section-experience" class="admin-section">
+                    <div class="section-editor">
+                        <div class="section-header">
+                            <h2>Experience</h2>
+                            <button class="btn btn-primary" id="add-experience-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                Add Experience
+                            </button>
+                        </div>
+                        <div class="items-list" id="experience-list"></div>
+                    </div>
+                </section>
+
+                <!-- Services Section Editor -->
+                <section id="section-services" class="admin-section">
+                    <div class="section-editor">
+                        <div class="section-header">
+                            <h2>Services</h2>
+                            <button class="btn btn-primary" id="add-service-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                Add Service
+                            </button>
+                        </div>
+                        <div class="items-list" id="services-list"></div>
+                    </div>
+                </section>
+
+                <!-- Contact Section Editor -->
+                <section id="section-contact" class="admin-section">
+                    <div class="section-editor">
+                        <h2>Contact Information</h2>
+                        <form id="contact-form" class="editor-form">
+                            <div class="form-group">
+                                <label for="contact-email">Email Address</label>
+                                <input type="email" id="contact-email" name="email" placeholder="your@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-phone">Phone Number</label>
+                                <input type="tel" id="contact-phone" name="phone" placeholder="+1 (555) 123-4567">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-linkedin">LinkedIn URL</label>
+                                <input type="url" id="contact-linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-twitter">Twitter URL</label>
+                                <input type="url" id="contact-twitter" name="twitter" placeholder="https://twitter.com/yourhandle">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-whatsapp">WhatsApp Number</label>
+                                <input type="tel" id="contact-whatsapp" name="whatsapp" placeholder="+1234567890">
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="whatsapp-enabled" name="whatsappEnabled">
+                                    <span>Show WhatsApp Floating Button</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-whatsapp-message">WhatsApp Default Message</label>
+                                <textarea id="contact-whatsapp-message" name="whatsappMessage" rows="2" placeholder="Hi! I saw your portfolio..."></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" data-action="reset-contact">Reset</button>
+                                <button type="submit" class="btn btn-primary">Save Contact Info</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Media Library Section -->
+                <section id="section-media" class="admin-section">
+                    <div class="section-editor media-manager">
+                        <h2>Media Library</h2>
+                        <p class="section-description">Upload and manage images and files (stored in Cloudflare R2)</p>
+                        <div id="media-manager-container"></div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="section-settings" class="admin-section">
+                    <div class="section-editor">
+                        <h2>Site Settings</h2>
+                        <form id="settings-form" class="editor-form">
+                            <div class="form-group">
+                                <label for="google-analytics">Google Analytics ID</label>
+                                <input type="text" id="google-analytics" name="googleAnalytics" placeholder="G-XXXXXXXXXX">
+                            </div>
+                            <h3>Theme Colors</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="primary-color">Primary Color</label>
+                                    <input type="color" id="primary-color" name="primaryColor" value="#0E7C86">
+                                </div>
+                                <div class="form-group">
+                                    <label for="accent-color">Accent Color</label>
+                                    <input type="color" id="accent-color" name="accentColor" value="#FF6B5F">
+                                </div>
+                            </div>
+                            <h3>Audit Thresholds</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="audit-roas">Min ROAS Threshold</label>
+                                    <input type="number" id="audit-roas" name="roasThreshold" step="0.1" value="1.5">
+                                </div>
+                                <div class="form-group">
+                                    <label for="audit-cpa">CPA Multiplier</label>
+                                    <input type="number" id="audit-cpa" name="cpaMultiplier" step="0.1" value="1.3">
+                                </div>
+                            </div>
+                            <h3>Admin Password</h3>
+                            <div class="form-group">
+                                <label for="new-admin-password">New Admin Password</label>
+                                <input type="password" id="new-admin-password" name="newAdminPassword" placeholder="Enter new password">
+                                <span class="field-hint">Leave empty to keep current password</span>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline" data-action="reset-settings">Reset</button>
+                                <button type="submit" class="btn btn-primary">Save Settings</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div id="item-modal" class="modal" hidden>
+        <div class="modal-backdrop modal-cancel"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Edit Item</h3>
+                <button class="modal-close modal-cancel">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+            <div class="modal-footer">
+                <button class="btn btn-outline modal-cancel">Cancel</button>
+                <button class="btn btn-primary modal-save">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Dialog -->
+    <div id="confirm-dialog" class="confirm-dialog" hidden>
+        <div class="confirm-backdrop confirm-cancel"></div>
+        <div class="confirm-content">
+            <h3 id="confirm-title">Confirm Action</h3>
+            <p id="confirm-message">Are you sure you want to proceed?</p>
+            <div class="confirm-actions">
+                <button class="btn btn-outline confirm-cancel">Cancel</button>
+                <button class="btn btn-danger confirm-ok">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Admin Scripts -->
+    <script src="js/admin.js"></script>
+    <script src="js/media-manager.js"></script>
+</body>
+</html>
