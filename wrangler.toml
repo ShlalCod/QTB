@@ -6,16 +6,43 @@ compatibility_date = "2024-01-01"
 pages_build_output_dir = "."
 
 # ============================================
-# KV Namespace - للبيانات النصية (لوحة التحكم)
-# تم وضع الـ ID الخاص بك هنا
+# KV Namespace - للبيانات النصية الصغيرة
+# (عناوين، إعدادات، SEO، بيانات المستخدمين)
+# Run: wrangler kv:namespace create CONTENT
+# Then replace the ID below
 # ============================================
 [[kv_namespaces]]
 binding = "CONTENT"
-id = "2642b2c038c44d26b3a25d82a78ef44d"
+id = "your-kv-namespace-id"
+
+# ============================================
+# R2 Bucket - للملفات الثقيلة
+# (الصور، الفيديوهات، ملفات التحميل)
+# Run: wrangler r2 bucket create qtmb-media
+# Then replace the bucket_name below
+# ============================================
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "qtmb-media"
 
 # ============================================
 # Environment Variables
 # ============================================
 [vars]
 ENVIRONMENT = "production"
+
+# Admin Password (change this!)
 ADMIN_PASSWORD = "qtmb2024admin"
+
+# ============================================
+# Build Settings
+# ============================================
+[build]
+command = ""
+watch_dir = "."
+
+# ============================================
+# Routes Configuration
+# ============================================
+# API routes are handled by functions/api/*.js
+# No additional route configuration needed for Pages Functions
