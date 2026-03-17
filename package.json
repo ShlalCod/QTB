@@ -1,0 +1,19 @@
+{
+  "name": "qtmb-portfolio",
+  "version": "2.0.0",
+  "description": "Media Buyer Portfolio - Cloudflare Pages Version",
+  "main": "index.html",
+  "scripts": {
+    "deploy": "wrangler pages deploy . --project-name=qtmb-portfolio",
+    "dev": "npx serve ."
+  },
+  "keywords": [
+    "portfolio",
+    "media-buyer",
+    "cloudflare",
+    "kv",
+    "r2"
+  ],
+  "author": "Media Buyer Portfolio",
+  "license": "MIT"
+}
