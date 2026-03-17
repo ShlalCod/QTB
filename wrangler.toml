@@ -12,7 +12,7 @@ pages_build_output_dir = "."
 # بعد إنشاء KV، ضع الـ ID هنا:
 [[kv_namespaces]]
 binding = "CONTENT"
-id = "ضع_هنا_الـ_ID_الخاص_بـ_KV"
+id = "2642b2c038c44d26b3a25d82a78ef44d"
 
 # ============================================
 # Environment Variables
