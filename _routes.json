@@ -3,8 +3,5 @@
     "include": [
         "/*"
     ],
-    "exclude": [
-        "/api/*",
-        "/admin.html"
-    ]
+    "exclude": []
 }
